@@ -1,1 +1,15 @@
-<p>game-detail works!</p>
+<div class="content container-fluid">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div class="page-header text-dark">
+      <button (click)="seeGameList()" class="btn btn-success mt-2">
+        Return to Games
+      </button>
+    </div>
+  </div>
+  <div class="text-center">
+    <img [src]="gameDetail.imageUrl" class="rounded" />
+  </div>
+  <div class="container-fluid text-center mt-3" style="width: 600px">
+    <h5>{{ gameDetail.description }}</h5>
+  </div>
+</div>

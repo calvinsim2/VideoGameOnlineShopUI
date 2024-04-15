@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameService } from '../service/game.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { GameService } from '../service/game.service';
   styleUrls: ['./all-game.component.scss'],
 })
 export class AllGameComponent implements OnInit {
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private router: Router) {}
 
   public gameList: any = [];
 
@@ -25,5 +26,9 @@ export class AllGameComponent implements OnInit {
         alert(`An error has occured. Please try again later `);
       },
     });
+  }
+
+  viewGame(id: any) {
+    this.router.navigate([`game/game/${id}`]);
   }
 }

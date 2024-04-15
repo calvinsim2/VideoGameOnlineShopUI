@@ -11,4 +11,8 @@ export class GameService {
   getAllGame() {
     return this.http.get<any>(this.baseApiUrl);
   }
+
+  getGamebyId(id: string) {
+    return this.http.get<any>(this.baseApiUrl + '/' + id);
+  }
 }

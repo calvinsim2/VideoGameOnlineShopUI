@@ -1,4 +1,5 @@
 export interface GameModel {
+  id: string;
   name: string;
   description: string;
   codeMatureRating: string;
@@ -7,6 +8,7 @@ export interface GameModel {
   imageUrl: string;
   developerId: string;
   codeGenre: string;
+  codePlatform: string;
 }
 
 export interface GameListModel {

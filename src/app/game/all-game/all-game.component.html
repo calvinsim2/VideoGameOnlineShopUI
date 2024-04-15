@@ -3,14 +3,12 @@
     <div
       class="card m-3 decorate-cards border-dark rounded"
       style="width: 18rem"
+      (click)="viewGame(game.id)"
     >
       <img [src]="game.imageUrl" class="card-img-top" alt="game" />
       <div class="card-body text-center">
         <h5 class="card-title">{{ game.name }}</h5>
         <p class="card-text">${{ game.price }}</p>
-        <div class="text-center">
-          <button class="btn btn-primary">Details</button>
-        </div>
       </div>
     </div>
   </div>
