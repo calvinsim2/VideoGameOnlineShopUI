@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { GameService } from '../service/game.service';
 import { ActivatedRoute } from '@angular/router';
 import { GameModel } from '../model/game.model';
+import {
+  CodesTableListModel,
+  CodesTableModel,
+} from '../model/codesTable.model';
 
 @Component({
   selector: 'app-game-detail',
@@ -12,6 +16,10 @@ import { GameModel } from '../model/game.model';
 export class GameDetailComponent {
   gameId!: string;
   gameDetail!: GameModel;
+  matureRating!: CodesTableModel;
+  matureRatingDecodeValue!: string;
+  genreList!: CodesTableListModel;
+  platformList!: CodesTableListModel;
 
   constructor(
     private gameService: GameService,
@@ -25,16 +33,23 @@ export class GameDetailComponent {
     });
 
     this.getGameDetails();
+    this.getExplicitCodeMatureRatingForGame(this.gameDetail?.codeMatureRating);
   }
 
   getGameDetails() {
     this.gameService.getGamebyId(this.gameId).subscribe((res: any) => {
-      console.log(res);
       this.gameDetail = res;
     });
   }
 
   seeGameList() {
     this.router.navigate([`game/allGame`]);
+  }
+
+  getExplicitCodeMatureRatingForGame(code: string) {
+    console.log(`Code Value is: ${code}`);
+    this.gameService.getGamebyId(code).subscribe((res: any) => {
+      this.matureRatingDecodeValue = res?.decodeValue;
+    });
   }
 }
