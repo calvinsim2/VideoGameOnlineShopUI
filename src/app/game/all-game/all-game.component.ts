@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '../service/game.service';
+import { GameModel } from '../model/game.model';
 
 @Component({
   selector: 'app-all-game',
@@ -10,7 +11,7 @@ import { GameService } from '../service/game.service';
 export class AllGameComponent implements OnInit {
   constructor(private gameService: GameService, private router: Router) {}
 
-  public gameList: any = [];
+  public gameList: GameModel[] = [];
 
   ngOnInit(): void {
     this.getAllGames();
@@ -19,7 +20,6 @@ export class AllGameComponent implements OnInit {
   getAllGames() {
     this.gameService.getAllGame().subscribe({
       next: (res) => {
-        console.log(res);
         this.gameList = res;
       },
       error: (err) => {
@@ -28,7 +28,7 @@ export class AllGameComponent implements OnInit {
     });
   }
 
-  viewGame(id: any) {
+  viewGame(id: string) {
     this.router.navigate([`game/game/${id}`]);
   }
 }

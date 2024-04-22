@@ -3,7 +3,3 @@ export interface CodesTableModel {
   code: string;
   decodeValue: string;
 }
-
-export interface CodesTableListModel {
-  codesTable: CodesTableModel[];
-}

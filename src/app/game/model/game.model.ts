@@ -10,7 +10,3 @@ export interface GameModel {
   codeGenre: string;
   codePlatform: string;
 }
-
-export interface GameListModel {
-  games: GameModel[];
-}

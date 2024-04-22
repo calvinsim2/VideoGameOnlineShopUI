@@ -14,10 +14,23 @@
       -------------------------------------------------
     </h1>
   </div>
+  <div
+    class="container-fluid text-center roboto-slab-title"
+    style="width: 600px"
+  >
+    <p>{{ platform }}</p>
+  </div>
   <div class="text-center">
     <img [src]="gameDetail.imageUrl" class="rounded" />
   </div>
   <div class="container-fluid text-center mt-3" style="width: 600px">
-    <h5>{{ gameDetail.description }}</h5>
+    <p>{{ matureRatingDecodeValue }}</p>
+  </div>
+  <div class="container-fluid text-center mt-3" style="width: 600px">
+    <p>{{ genres }}</p>
+  </div>
+
+  <div class="container-fluid text-center mt-3" style="width: 600px">
+    <p>{{ gameDetail.description }}</p>
   </div>
 </div>
