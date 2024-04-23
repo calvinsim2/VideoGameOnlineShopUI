@@ -1,0 +1,61 @@
+<div class="page-header d-flex justify-content-between align-items-center">
+  <div class="page-header text-dark">
+    <button (click)="seeGameList()" class="btn btn-success mt-2">
+      Return to Games
+    </button>
+  </div>
+</div>
+<div
+  class="container-fluid text-center mt-3 bg-info border border-dark rounded"
+  style="width: 800px"
+>
+  <div class="container-fluid text-center mt-3 bg-info" style="width: 700px">
+    <form [formGroup]="gameSubmissionForm">
+      <div class="row mb-3">
+        <div class="text-left">
+          <label class="col-form-label"
+            >Name <span class="text-danger">*</span></label
+          >
+        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+      </div>
+      <div class="row mb-3">
+        <div>
+          <label class="col-form-label"
+            >Description <span class="text-danger">*</span></label
+          >
+        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="description"
+        />
+      </div>
+      <!-- MatureRating -->
+      <div class="mx-auto mb-3" style="width: 300px">
+        <label for="inputState" class="form-label">Mature Rating</label>
+        <select id="inputState" class="form-select">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <!-- Developer -->
+      <div class="mx-auto mb-3" style="width: 300px">
+        <label for="inputState" class="form-label">Developer</label>
+        <select id="inputState" class="form-select">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+    </form>
+    <button type="button" class="btn btn-success">Add Game!</button>
+  </div>
+</div>

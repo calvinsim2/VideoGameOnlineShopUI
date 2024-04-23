@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './game.component';
 import { AllGameComponent } from './all-game/all-game.component';
 import { GameDetailComponent } from './game-detail/game-detail.component';
+import { AddGameComponent } from './add-game/add-game.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'allGame', pathMatch: 'full' },
       { path: 'allGame', component: AllGameComponent },
       { path: 'game/:id', component: GameDetailComponent },
+      { path: 'addGame', component: AddGameComponent },
     ],
   },
 ];

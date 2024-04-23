@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GameModel } from '../model/game.model';
 import { CodesTableModel } from '../model/codesTable.model';
 import { switchMap, take } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-game-detail',
@@ -42,47 +43,40 @@ export class GameDetailComponent {
         take(1),
         switchMap((data: GameModel) => {
           this.gameDetail = data;
+
+          // Process mature rating
           const codeMatureRating: string = data.codeMatureRating;
+          const matureRating$ =
+            this.gameService.getExplicitCodeMatureRating(codeMatureRating);
 
-          return this.gameService.getExplicitCodeMatureRating(codeMatureRating);
-        })
-      )
-      .pipe(take(1))
-      .subscribe((res: CodesTableModel) => {
-        this.matureRatingDecodeValue = res.decodeValue;
-      });
-
-    this.gameService
-      .getGamebyId(this.gameId)
-      .pipe(
-        take(1),
-        switchMap((data: GameModel) => {
+          // Process genres
           const codeGenres: string = data.codeGenre;
+          const genres$ = this.gameService.getSelectedCodeGenre(codeGenres);
 
-          return this.gameService.getSelectedCodeGenre(codeGenres);
-        })
-      )
-      .pipe(take(1))
-      .subscribe((res: CodesTableModel[]) => {
-        this.genreList = res;
-        this.genres = this.extractListToDecodeValues(this.genreList);
-      });
-
-    this.gameService
-      .getGamebyId(this.gameId)
-      .pipe(
-        take(1),
-        switchMap((data: GameModel) => {
+          // Process platform
           const codePlatform: string = data.codePlatform;
+          const platform$ =
+            this.gameService.getSelectedCodePlatform(codePlatform);
 
-          return this.gameService.getSelectedCodePlatform(codePlatform);
+          // Combining all observables
+          return forkJoin([matureRating$, genres$, platform$]);
         })
       )
-      .pipe(take(1))
-      .subscribe((res: CodesTableModel[]) => {
-        this.platformList = res;
-        this.platform = this.extractListToDecodeValues(this.platformList);
-      });
+      .subscribe(
+        ([matureRating, genres, platform]: [
+          CodesTableModel,
+          CodesTableModel[],
+          CodesTableModel[]
+        ]) => {
+          this.matureRatingDecodeValue = matureRating.decodeValue;
+
+          this.genreList = genres;
+          this.genres = this.extractListToDecodeValues(this.genreList);
+
+          this.platformList = platform;
+          this.platform = this.extractListToDecodeValues(this.platformList);
+        }
+      );
   }
 
   seeGameList() {
