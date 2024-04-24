@@ -22,13 +22,15 @@ export class AddGameComponent {
   public gameSubmissionForm!: FormGroup;
   public developerList: DeveloperModel[] = [];
 
-  ngOninit() {
+  ngOnInit() {
     this.gameSubmissionForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       codeMatureRating: ['', Validators.required],
       price: [0, Validators.min(0)],
     });
+
+    this.getAllDevelopers()
   }
 
   getAllDevelopers() {
