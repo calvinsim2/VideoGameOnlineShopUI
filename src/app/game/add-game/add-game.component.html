@@ -40,17 +40,16 @@
         />
       </div>
       <!-- MatureRating -->
-      <div class="mx-auto mb-3" style="width: 300px">
-        <label for="inputState" class="form-label">Mature Rating</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
+      <div class="mx-auto mb-3" style="width: 75%">
+        <label for="codeMatureRating" class="form-label">Mature Rating</label>
+        <select id="codeMatureRating" formControlName="codeMatureRating" class="form-control form-select text-center">
+          <option *ngFor="let matureRating of codeMatureRatingList" [value]="matureRating.code"> {{ matureRating.decodeValue }}</option>
         </select>
       </div>
       <!-- Developer -->
-      <div class="mx-auto mb-3" style="width: 300px">
-        <label for="inputState" class="form-label">Developer</label>
-        <select class="form-control form-select" formControlName="developerId" id="developerId">
+      <div class="mx-auto mb-3" style="width: 50%">
+        <label for="developerId" class="form-label">Developer</label>
+        <select class="form-control form-select text-center" formControlName="developerId" id="developerId">
           <option *ngFor="let developer of developerList" [value]="developer.id"> {{ developer.name }}</option>
         </select>
       </div>

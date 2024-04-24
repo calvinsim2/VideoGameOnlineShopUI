@@ -10,6 +10,13 @@ export class CodesTableService {
   apiConstant: ApiConstant = new ApiConstant();
   constructor(private http: HttpClient) {}
 
+  getAllCodeMatureRating() {
+    return this.http.get<CodesTableModel[]>(this.apiConstant.baseApiUrl +
+      this.apiConstant.codesTable +
+      '/' +
+      this.apiConstant.matureRating)
+  }
+
   getExplicitCodeMatureRating(codes: string) {
     return this.http.get<CodesTableModel>(
       this.apiConstant.baseApiUrl +
@@ -21,6 +28,13 @@ export class CodesTableService {
     );
   }
 
+  getAllCodeGenre() {
+    return this.http.get<CodesTableModel[]>(this.apiConstant.baseApiUrl +
+      this.apiConstant.codesTable +
+      '/' +
+      this.apiConstant.genre)
+  }
+
   getSelectedCodeGenre(codes: string) {
     return this.http.get<CodesTableModel[]>(
       this.apiConstant.baseApiUrl +
@@ -30,6 +44,13 @@ export class CodesTableService {
         '/selected/' +
         codes
     );
+  }
+
+  getAllCodePlatform() {
+    return this.http.get<CodesTableModel[]>(this.apiConstant.baseApiUrl +
+      this.apiConstant.codesTable +
+      '/' +
+      this.apiConstant.platform)
   }
 
   getSelectedCodePlatform(codes: string) {

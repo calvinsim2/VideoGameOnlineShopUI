@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { DeveloperService } from '../service/developer.service';
 import { take } from 'rxjs';
 import { DeveloperModel } from '../model/developer.model';
+import { CodesTableService } from '../service/codes-table.service';
+import { CodesTableModel } from '../model/codesTable.model';
 
 @Component({
   selector: 'app-add-game',
@@ -15,15 +17,19 @@ export class AddGameComponent {
   constructor(
     private gameService: GameService,
     private developerService: DeveloperService,
+    private codesTableService: CodesTableService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
 
   public gameSubmissionForm!: FormGroup;
   public developerList: DeveloperModel[] = [];
+  public codeMatureRatingList: CodesTableModel[] = [];
+  public codeGenreList: CodesTableModel[] = [];
+  public codePlatformList: CodesTableModel[] = [];
 
   ngOnInit() {
-    this.getAllDevelopers()
+    this.getAllRequiredData()
     
     this.gameSubmissionForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -35,11 +41,15 @@ export class AddGameComponent {
 
   }
 
+  getAllRequiredData() {
+    this.getAllDevelopers()
+    this.getAllCodeMatureRating()
+  }
+
   getAllDevelopers() {
     this.developerService.getAllDeveloper().pipe(take(1)).subscribe({
       next: (res) => {
         this.developerList = res;
-        console.log(this.developerList)
       },
       error: (err) => {
         alert(`An error has occured. Please try again later `);
@@ -47,6 +57,39 @@ export class AddGameComponent {
     }
       
     )
+  }
+
+  getAllCodeMatureRating() {
+    this.codesTableService.getAllCodeMatureRating().pipe(take(1)).subscribe({
+      next: (res) => {
+        this.codeMatureRatingList = res;
+      },
+      error: (err) => {
+        alert(`An error has occured. Please try again later `);
+      },
+    })
+  }
+
+  getAllCodeGenre() {
+    this.codesTableService.getAllCodeGenre().pipe(take(1)).subscribe({
+      next: (res) => {
+        this.codeGenreList = res;
+      },
+      error: (err) => {
+        alert(`An error has occured. Please try again later `);
+      },
+    })
+  }
+
+  getAllCodePlatform() {
+    this.codesTableService.getAllCodePlatform().pipe(take(1)).subscribe({
+      next: (res) => {
+        this.codePlatformList = res;
+      },
+      error: (err) => {
+        alert(`An error has occured. Please try again later `);
+      },
+    })
   }
 
   submitGame() {
