@@ -50,7 +50,7 @@
       <!-- Developer -->
       <div class="mx-auto mb-3" style="width: 300px">
         <label for="inputState" class="form-label">Developer</label>
-        <select class="form-control" formControlName="developerId" id="developerId">
+        <select class="form-control form-select" formControlName="developerId" id="developerId">
           <option *ngFor="let developer of developerList" [value]="developer.id"> {{ developer.name }}</option>
         </select>
       </div>
