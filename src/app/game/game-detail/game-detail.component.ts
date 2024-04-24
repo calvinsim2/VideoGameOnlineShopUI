@@ -6,6 +6,7 @@ import { GameModel } from '../model/game.model';
 import { CodesTableModel } from '../model/codesTable.model';
 import { switchMap, take } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { CodesTableService } from '../service/codes-table.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -24,6 +25,7 @@ export class GameDetailComponent {
 
   constructor(
     private gameService: GameService,
+    private codesTableService: CodesTableService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -47,16 +49,16 @@ export class GameDetailComponent {
           // Process mature rating
           const codeMatureRating: string = data.codeMatureRating;
           const matureRating$ =
-            this.gameService.getExplicitCodeMatureRating(codeMatureRating);
+            this.codesTableService.getExplicitCodeMatureRating(codeMatureRating);
 
           // Process genres
           const codeGenres: string = data.codeGenre;
-          const genres$ = this.gameService.getSelectedCodeGenre(codeGenres);
+          const genres$ = this.codesTableService.getSelectedCodeGenre(codeGenres);
 
           // Process platform
           const codePlatform: string = data.codePlatform;
           const platform$ =
-            this.gameService.getSelectedCodePlatform(codePlatform);
+            this.codesTableService.getSelectedCodePlatform(codePlatform);
 
           // Combining all observables
           return forkJoin([matureRating$, genres$, platform$]);
