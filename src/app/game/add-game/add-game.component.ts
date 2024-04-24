@@ -28,6 +28,7 @@ export class AddGameComponent {
       description: ['', Validators.required],
       codeMatureRating: ['', Validators.required],
       price: [0, Validators.min(0)],
+      developerId: ['', Validators.required],
     });
 
     this.getAllDevelopers()
@@ -47,6 +48,9 @@ export class AddGameComponent {
     )
   }
 
+  submitGame() {
+    console.log(this.gameSubmissionForm.value)
+  }
   seeGameList() {
     this.router.navigate([`game/allGame`]);
   }

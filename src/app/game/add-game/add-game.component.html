@@ -50,12 +50,11 @@
       <!-- Developer -->
       <div class="mx-auto mb-3" style="width: 300px">
         <label for="inputState" class="form-label">Developer</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
+        <select class="form-control" formControlName="developerId" id="developerId">
+          <option *ngFor="let developer of developerList" [value]="developer.id"> {{ developer.name }}</option>
         </select>
       </div>
     </form>
-    <button type="button" class="btn btn-success">Add Game!</button>
+    <button type="button" class="btn btn-success" (click)="submitGame()">Add Game!</button>
   </div>
 </div>
