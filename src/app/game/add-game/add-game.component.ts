@@ -27,14 +27,17 @@ export class AddGameComponent {
   public codeMatureRatingList: CodesTableModel[] = [];
   public codeGenreList: CodesTableModel[] = [];
   public codePlatformList: CodesTableModel[] = [];
+  public isGenreListPopulated: boolean = false;
 
   ngOnInit() {
     this.getAllRequiredData()
-    
+    // addControl 
+    // new mapped array, 
     this.gameSubmissionForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       codeMatureRating: ['', Validators.required],
+      concaetenatedCodeGenre: ['', Validators.required],
       price: [0, Validators.min(0)],
       developerId: [this.developerList.length > 0 ? this.developerList[0].name : '', Validators.required],
     });
@@ -44,6 +47,8 @@ export class AddGameComponent {
   getAllRequiredData() {
     this.getAllDevelopers()
     this.getAllCodeMatureRating()
+    this.getAllCodeGenre()
+    this.getAllCodePlatform()
   }
 
   getAllDevelopers() {
@@ -74,6 +79,7 @@ export class AddGameComponent {
     this.codesTableService.getAllCodeGenre().pipe(take(1)).subscribe({
       next: (res) => {
         this.codeGenreList = res;
+        this.isGenreListPopulated = true;
       },
       error: (err) => {
         alert(`An error has occured. Please try again later `);
@@ -90,6 +96,14 @@ export class AddGameComponent {
         alert(`An error has occured. Please try again later `);
       },
     })
+  }
+
+  updateConcatenatedCodeGenre() {
+    console.log(this.gameSubmissionForm)
+    const selectedCodeGenres = this.codeGenreList.filter(cg => this.gameSubmissionForm.get(cg.code))
+      
+    console.log(selectedCodeGenres.length)
+
   }
 
   submitGame() {
