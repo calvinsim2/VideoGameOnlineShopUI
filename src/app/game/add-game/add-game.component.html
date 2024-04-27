@@ -42,28 +42,57 @@
       <!-- MatureRating -->
       <div class="mx-auto mb-3" style="width: 75%">
         <label for="codeMatureRating" class="form-label">Mature Rating</label>
-        <select id="codeMatureRating" formControlName="codeMatureRating" class="form-control form-select text-center">
-          <option *ngFor="let matureRating of codeMatureRatingList" [value]="matureRating.code"> {{ matureRating.decodeValue }}</option>
+        <select
+          id="codeMatureRating"
+          formControlName="codeMatureRating"
+          class="form-control form-select text-center"
+        >
+          <option
+            *ngFor="let matureRating of codeMatureRatingList"
+            [value]="matureRating.code"
+          >
+            {{ matureRating.decodeValue }}
+          </option>
         </select>
       </div>
       <!-- Developer -->
       <div class="mx-auto mb-3" style="width: 50%">
         <label for="developerId" class="form-label">Developer</label>
-        <select class="form-control form-select text-center" formControlName="developerId" id="developerId">
-          <option *ngFor="let developer of developerList" [value]="developer.id"> {{ developer.name }}</option>
+        <select
+          class="form-control form-select text-center"
+          formControlName="developerId"
+          id="developerId"
+        >
+          <option
+            *ngFor="let developer of developerList"
+            [value]="developer.id"
+          >
+            {{ developer.name }}
+          </option>
         </select>
       </div>
-      <div class="mx-auto bg-secondary" style="width: 80%">
+      <div class="mx-auto bg-info" style="width: 100%">
         <label for="developerId" class="form-label">Genre</label>
       </div>
-      <div class="mx-auto mb-3 bg-secondary" style="width: 80%" *ngIf="isGenreListPopulated">
-        <div *ngFor="let genre of codeGenreList">
+      <div
+        class="d-flex flex-column justify-content-evenly bg-info"
+        style="width: 100%"
+      >
+        <div
+          *ngFor="let genre of codeGenreList"
+          class="d-flex flex-row justify-content-evenly"
+        >
           <label>
-            <input type="checkbox" formControlName="{{ genre.code }}" (change)="updateConcatenatedCodeGenre()">{{ genre.decodeValue }}
+            <input
+              type="checkbox"
+              formControlName="{{ genre.decodeValue }}"
+            />{{ genre.decodeValue }}
           </label>
         </div>
       </div>
     </form>
-    <button type="button" class="btn btn-success" (click)="submitGame()">Add Game!</button>
+    <button type="button" class="btn btn-success" (click)="submitGame()">
+      Add Game!
+    </button>
   </div>
 </div>
