@@ -11,7 +11,7 @@ import { DeveloperService } from '../service/developer.service';
 import { take } from 'rxjs';
 import { DeveloperModel } from '../model/developer.model';
 import { CodesTableService } from '../service/codes-table.service';
-import { CodesTableModel, GenreFormControls } from '../model/codesTable.model';
+import { CodesTableModel } from '../model/codesTable.model';
 
 @Component({
   selector: 'app-add-game',
@@ -28,6 +28,8 @@ export class AddGameComponent {
   ) {}
 
   public gameSubmissionForm!: FormGroup;
+  public codesTableGenreSubmissionForm!: FormGroup;
+  public codesTablePlatformSubmissionForm!: FormGroup;
   public developerList: DeveloperModel[] = [];
   public codeMatureRatingList: CodesTableModel[] = [];
   public codeGenreList: CodesTableModel[] = [];
@@ -45,6 +47,9 @@ export class AddGameComponent {
         Validators.required,
       ],
     });
+
+    this.codesTableGenreSubmissionForm = this.formBuilder.group({});
+    this.codesTablePlatformSubmissionForm = this.formBuilder.group({});
 
     this.getAllRequiredData();
   }
@@ -93,7 +98,7 @@ export class AddGameComponent {
           this.codeGenreList = res;
           this.addCodeGenreParametersIntoFormBuilder(this.codeGenreList);
 
-          console.log(this.gameSubmissionForm);
+          console.log(this.codesTableGenreSubmissionForm);
         },
         error: (err) => {
           alert(`An error has occured. Please try again later `);
@@ -103,13 +108,13 @@ export class AddGameComponent {
 
   addCodeGenreParametersIntoFormBuilder(codeGenreList: CodesTableModel[]) {
     codeGenreList.forEach((codeGenre) => {
-      this.gameSubmissionForm.addControl(
+      this.codesTableGenreSubmissionForm.addControl(
         codeGenre.decodeValue,
         new FormControl(false)
       );
     });
 
-    console.log(this.gameSubmissionForm);
+    console.log(this.codesTableGenreSubmissionForm);
   }
 
   getAllCodePlatform() {
@@ -126,14 +131,9 @@ export class AddGameComponent {
       });
   }
 
-  // updateConcatenatedCodeGenre() {
-  //   console.log(this.gameSubmissionForm);
-  //   const selectedCodeGenres = this.codeGenreList.filter((cg) =>
-  //     this.gameSubmissionForm.get(cg.code)
-  //   );
-
-  //   console.log(selectedCodeGenres.length);
-  // }
+  updateConcatenatedCodeGenre() {
+    console.log(this.codesTableGenreSubmissionForm);
+  }
 
   submitGame() {
     console.log(this.gameSubmissionForm.value);

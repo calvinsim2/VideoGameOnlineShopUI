@@ -6,31 +6,33 @@
       </button>
     </div>
   </div>
-  <div class="text-center">
-    <h1 class="text-center roboto-slab-title">{{ gameDetail.name }}</h1>
-  </div>
-  <div class="text-center">
-    <h1 class="text-center roboto-slab-title">
-      -------------------------------------------------
-    </h1>
-  </div>
-  <div
-    class="container-fluid text-center roboto-slab-title"
-    style="width: 600px"
-  >
-    <p>{{ platform }}</p>
-  </div>
-  <div class="text-center">
-    <img [src]="gameDetail.imageUrl" class="rounded" />
-  </div>
-  <div class="container-fluid text-center mt-3" style="width: 600px">
-    <p>{{ matureRatingDecodeValue }}</p>
-  </div>
-  <div class="container-fluid text-center mt-3" style="width: 600px">
-    <p>{{ genres }}</p>
-  </div>
+  <div *ngIf="hasDataLoaded">
+    <div class="text-center">
+      <h1 class="text-center roboto-slab-title">{{ gameDetail.name }}</h1>
+    </div>
+    <div class="text-center">
+      <h1 class="text-center roboto-slab-title">
+        -------------------------------------------------
+      </h1>
+    </div>
+    <div
+      class="container-fluid text-center roboto-slab-title"
+      style="width: 600px"
+    >
+      <p>{{ platform }}</p>
+    </div>
+    <div class="text-center">
+      <img [src]="gameDetail.imageUrl" class="rounded" />
+    </div>
+    <div class="container-fluid text-center mt-3" style="width: 600px">
+      <p>{{ matureRatingDecodeValue }}</p>
+    </div>
+    <div class="container-fluid text-center mt-3" style="width: 600px">
+      <p>{{ genres }}</p>
+    </div>
 
-  <div class="container-fluid text-center mt-3" style="width: 600px">
-    <p>{{ gameDetail.description }}</p>
+    <div class="container-fluid text-center mt-3" style="width: 600px">
+      <p>{{ gameDetail.description }}</p>
+    </div>
   </div>
 </div>

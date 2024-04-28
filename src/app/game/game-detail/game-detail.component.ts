@@ -22,6 +22,7 @@ export class GameDetailComponent {
   genres!: string;
   platformList: CodesTableModel[] = [];
   platform!: string;
+  hasDataLoaded: boolean = false;
 
   constructor(
     private gameService: GameService,
@@ -49,11 +50,14 @@ export class GameDetailComponent {
           // Process mature rating
           const codeMatureRating: string = data.codeMatureRating;
           const matureRating$ =
-            this.codesTableService.getExplicitCodeMatureRating(codeMatureRating);
+            this.codesTableService.getExplicitCodeMatureRating(
+              codeMatureRating
+            );
 
           // Process genres
           const codeGenres: string = data.codeGenre;
-          const genres$ = this.codesTableService.getSelectedCodeGenre(codeGenres);
+          const genres$ =
+            this.codesTableService.getSelectedCodeGenre(codeGenres);
 
           // Process platform
           const codePlatform: string = data.codePlatform;
@@ -77,6 +81,7 @@ export class GameDetailComponent {
 
           this.platformList = platform;
           this.platform = this.extractListToDecodeValues(this.platformList);
+          this.hasDataLoaded = true;
         }
       );
   }

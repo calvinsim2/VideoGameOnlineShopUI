@@ -71,6 +71,8 @@
           </option>
         </select>
       </div>
+    </form>
+    <form [formGroup]="codesTableGenreSubmissionForm">
       <div class="mx-auto bg-info" style="width: 100%">
         <label for="developerId" class="form-label">Genre</label>
       </div>
@@ -86,6 +88,7 @@
             <input
               type="checkbox"
               formControlName="{{ genre.decodeValue }}"
+              (change)="updateConcatenatedCodeGenre()"
             />{{ genre.decodeValue }}
           </label>
         </div>

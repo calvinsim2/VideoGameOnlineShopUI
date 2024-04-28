@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '../service/game.service';
 import { GameModel } from '../model/game.model';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-all-game',
@@ -18,7 +19,7 @@ export class AllGameComponent implements OnInit {
   }
 
   getAllGames() {
-    this.gameService.getAllGame().subscribe({
+    this.gameService.getAllGame().pipe(take(1)).subscribe({
       next: (res) => {
         this.gameList = res;
       },
