@@ -14,21 +14,7 @@ fdescribe('AllGameComponent', () => {
   let fixture: ComponentFixture<AllGameComponent>;
   let router: Router;
   let mockGameService = jasmine.createSpyObj(['getAllGame', 'getGamebyId']);
-
-  const mockSingleGameResponse: GameModel[] = [
-    {
-      id: 'string',
-      name: 'string',
-      description: 'string',
-      codeMatureRating: 'string',
-      rating: 10,
-      price: 10,
-      imageUrl: 'string',
-      developerId: 'string',
-      codeGenre: 'string',
-      codePlatform: 'string',
-    },
-  ];
+  const mockGameResponse: GameModel[] = [];
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -44,23 +30,41 @@ fdescribe('AllGameComponent', () => {
 
     fixture = TestBed.createComponent(AllGameComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router)
-    mockGameService.getAllGame.and.returnValue(of(mockSingleGameResponse));
+    router = TestBed.inject(Router);
+    mockGameService.getAllGame.and.returnValue(of(mockGameResponse));
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should return an array of one single GameModel item on getAllGame_POSITIVE', () => {
+    // Arrange
+    const mockSingleGameResponse: GameModel[] = [
+      {
+        id: 'string',
+        name: 'string',
+        description: 'string',
+        codeMatureRating: 'string',
+        rating: 10,
+        price: 10,
+        imageUrl: 'string',
+        developerId: 'string',
+        codeGenre: 'string',
+        codePlatform: 'string',
+      },
+    ];
+
+    // Act
+    mockGameService.getAllGame.and.returnValue(of(mockSingleGameResponse));
+
     component.getAllGames();
 
+    // Assert
     expect(component.gameList.length).toEqual(1);
     expect(component.gameList[0].description).toEqual('string');
   });
 
   it('should return an array of multiple GameModel item on getAllGame_POSITIVE', () => {
+    // Arrange
     const mockMultipleGameResponse: GameModel[] = [
       {
         id: 'string',
@@ -99,11 +103,27 @@ fdescribe('AllGameComponent', () => {
         codePlatform: 'string',
       },
     ];
+
+    // Act
     mockGameService.getAllGame.and.returnValue(of(mockMultipleGameResponse));
 
     component.getAllGames();
 
+    // Assert
     expect(component.gameList).toEqual(mockMultipleGameResponse);
+  });
+
+  it('should return an empty array on getAllGame_NEGATIVE', () => {
+    // Arrange
+    const mockEmptyGameResponse: GameModel[] = [];
+
+    // Act
+    mockGameService.getAllGame.and.returnValue(of(mockEmptyGameResponse));
+
+    component.getAllGames();
+
+    // Assert
+    expect(component.gameList.length).toEqual(0);
   });
 
   it('should call navigate with the specified route on viewGame_POSITIVE', () => {
