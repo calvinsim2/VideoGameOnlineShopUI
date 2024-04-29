@@ -41,6 +41,7 @@ export class AddGameComponent {
       description: ['', Validators.required],
       codeMatureRating: ['', Validators.required],
       concatenatedCodeGenre: ['', Validators.required],
+      concatenatedCodePlatform: ['', Validators.required],
       price: [0, Validators.min(0)],
       developerId: [
         this.developerList.length > 0 ? this.developerList[0].name : '',
@@ -89,6 +90,7 @@ export class AddGameComponent {
       });
   }
 
+  // ========== CodeGenre ===================================
   getAllCodeGenre() {
     this.codesTableService
       .getAllCodeGenre()
@@ -96,34 +98,10 @@ export class AddGameComponent {
       .subscribe({
         next: (res) => {
           this.codeGenreList = res;
-          this.addCodeGenreParametersIntoFormBuilder(this.codeGenreList);
-
-          console.log(this.codesTableGenreSubmissionForm);
-        },
-        error: (err) => {
-          alert(`An error has occured. Please try again later `);
-        },
-      });
-  }
-
-  addCodeGenreParametersIntoFormBuilder(codeGenreList: CodesTableModel[]) {
-    codeGenreList.forEach((codeGenre) => {
-      this.codesTableGenreSubmissionForm.addControl(
-        codeGenre.decodeValue,
-        new FormControl(false)
-      );
-    });
-
-    console.log(this.codesTableGenreSubmissionForm);
-  }
-
-  getAllCodePlatform() {
-    this.codesTableService
-      .getAllCodePlatform()
-      .pipe(take(1))
-      .subscribe({
-        next: (res) => {
-          this.codePlatformList = res;
+          this.addCodesTableParametersIntoFormBuilder(
+            this.codeGenreList,
+            this.codesTableGenreSubmissionForm
+          );
         },
         error: (err) => {
           alert(`An error has occured. Please try again later `);
@@ -132,7 +110,64 @@ export class AddGameComponent {
   }
 
   updateConcatenatedCodeGenre() {
-    console.log(this.codesTableGenreSubmissionForm);
+    let selectedCodeGenres: string = this.filterSelectedCodesTableToString(
+      this.codesTableGenreSubmissionForm.value
+    );
+
+    this.gameSubmissionForm.patchValue({
+      concatenatedCodeGenre: selectedCodeGenres,
+    });
+  }
+
+  // ========== CodePlatform ===================================
+  getAllCodePlatform() {
+    this.codesTableService
+      .getAllCodePlatform()
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.codePlatformList = res;
+          this.addCodesTableParametersIntoFormBuilder(
+            this.codePlatformList,
+            this.codesTablePlatformSubmissionForm
+          );
+        },
+        error: (err) => {
+          alert(`An error has occured. Please try again later `);
+        },
+      });
+  }
+
+  updateConcatenatedCodePlatform() {
+    let selectedCodePlatforms: string = this.filterSelectedCodesTableToString(
+      this.codesTablePlatformSubmissionForm.value
+    );
+
+    this.gameSubmissionForm.patchValue({
+      concatenatedCodePlatform: selectedCodePlatforms,
+    });
+  }
+
+  // ---------- Common Methods -------------------------------
+  filterSelectedCodesTableToString(codes: object) {
+    let selectedCodeTableList: string[] = [];
+
+    for (const [option, isChecked] of Object.entries(codes)) {
+      if (isChecked) {
+        selectedCodeTableList.push(option);
+      }
+    }
+
+    return selectedCodeTableList.toString();
+  }
+
+  addCodesTableParametersIntoFormBuilder(
+    codeGenreList: CodesTableModel[],
+    codesTableFormGroup: FormGroup
+  ) {
+    codeGenreList.forEach((codeGenre) => {
+      codesTableFormGroup.addControl(codeGenre.code, new FormControl(false));
+    });
   }
 
   submitGame() {

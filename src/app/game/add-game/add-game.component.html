@@ -39,9 +39,25 @@
           formControlName="description"
         />
       </div>
+      <div class="row mb-3">
+        <div>
+          <label class="col-form-label"
+            >Price <span class="text-danger">*</span></label
+          >
+        </div>
+
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+        />
+      </div>
       <!-- MatureRating -->
       <div class="mx-auto mb-3" style="width: 75%">
-        <label for="codeMatureRating" class="form-label">Mature Rating</label>
+        <label for="codeMatureRating" class="form-label"
+          >Mature Rating<span class="text-danger">*</span></label
+        >
         <select
           id="codeMatureRating"
           formControlName="codeMatureRating"
@@ -57,7 +73,9 @@
       </div>
       <!-- Developer -->
       <div class="mx-auto mb-3" style="width: 50%">
-        <label for="developerId" class="form-label">Developer</label>
+        <label for="developerId" class="form-label"
+          >Developer<span class="text-danger">*</span></label
+        >
         <select
           class="form-control form-select text-center"
           formControlName="developerId"
@@ -74,7 +92,9 @@
     </form>
     <form [formGroup]="codesTableGenreSubmissionForm">
       <div class="mx-auto bg-info" style="width: 100%">
-        <label for="developerId" class="form-label">Genre</label>
+        <label for="concatenatedCodeGenre" class="form-label"
+          >Genre<span class="text-danger">*</span></label
+        >
       </div>
       <div
         class="d-flex flex-column justify-content-evenly bg-info"
@@ -87,9 +107,33 @@
           <label>
             <input
               type="checkbox"
-              formControlName="{{ genre.decodeValue }}"
+              formControlName="{{ genre.code }}"
               (change)="updateConcatenatedCodeGenre()"
             />{{ genre.decodeValue }}
+          </label>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="codesTablePlatformSubmissionForm">
+      <div class="mx-auto bg-info" style="width: 100%">
+        <label for="concatenatedCodePlatform" class="form-label"
+          >Platform<span class="text-danger">*</span></label
+        >
+      </div>
+      <div
+        class="d-flex flex-column justify-content-evenly bg-info"
+        style="width: 100%"
+      >
+        <div
+          *ngFor="let platform of codePlatformList"
+          class="d-flex flex-row justify-content-evenly"
+        >
+          <label>
+            <input
+              type="checkbox"
+              formControlName="{{ platform.code }}"
+              (change)="updateConcatenatedCodePlatform()"
+            />{{ platform.decodeValue }}
           </label>
         </div>
       </div>
