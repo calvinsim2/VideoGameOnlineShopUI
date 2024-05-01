@@ -25,18 +25,30 @@
           formControlName="name"
         />
       </div>
+      <!-- Description -->
       <div class="row mb-3">
         <div>
           <label class="col-form-label"
             >Description <span class="text-danger">*</span></label
           >
         </div>
-
         <input
           type="text"
           class="form-control"
           id="description"
           formControlName="description"
+        />
+      </div>
+      <!-- Image -->
+      <div class="row mb-3">
+        <div>
+          <label class="col-form-label">Image Url </label>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="imageurl"
+          formControlName="imageurl"
         />
       </div>
       <div class="row mb-3">
@@ -45,7 +57,6 @@
             >Price <span class="text-danger">*</span></label
           >
         </div>
-
         <input
           type="number"
           class="form-control"
@@ -96,52 +107,44 @@
           >Genre<span class="text-danger">*</span></label
         >
       </div>
-      <div
-        class="genre-container text-left"
-      >
-        <div
-          *ngFor="let genre of codeGenreList"
-          class="genre"
-        >
-        <input
-        type="checkbox"
-        formControlName="{{ genre.code }}" 
-        id="{{ genre.code }}"
-        (change)="updateConcatenatedCodeGenre()"
-        
-        />
-        <label for="{{ genre.code }}" class="genre-text">
-            {{genre.decodeValue}}
+      <div class="checkbox-container text-left">
+        <div *ngFor="let genre of codeGenreList" class="checkboxlist">
+          <input
+            type="checkbox"
+            formControlName="{{ genre.code }}"
+            id="{{ genre.code }}"
+            (change)="updateConcatenatedCodeGenre()"
+          />
+          <label for="{{ genre.code }}" class="checkbox-text">
+            {{ genre.decodeValue }}
           </label>
         </div>
       </div>
     </form>
     <form [formGroup]="codesTablePlatformSubmissionForm">
-      <div class="mx-auto bg-info" style="width: 100%">
+      <div class="mx-auto">
         <label for="concatenatedCodePlatform" class="form-label"
           >Platform<span class="text-danger">*</span></label
         >
       </div>
-      <div
-        class="d-flex flex-column justify-content-evenly bg-info"
-        style="width: 100%"
-      >
-        <div
-          *ngFor="let platform of codePlatformList"
-          class="d-flex flex-row justify-content-evenly"
-        >
-          <label>
-            <input
-              type="checkbox"
-              formControlName="{{ platform.code }}"
-              (change)="updateConcatenatedCodePlatform()"
-            />{{ platform.decodeValue }}
+      <div class="checkbox-container text-left">
+        <div *ngFor="let platform of codePlatformList" class="checkboxlist">
+          <input
+            type="checkbox"
+            formControlName="{{ platform.code }}"
+            id="{{ platform.code }}"
+            (change)="updateConcatenatedCodePlatform()"
+          />
+          <label for="{{ platform.code }}" class="checkbox-text">
+            {{ platform.decodeValue }}
           </label>
         </div>
       </div>
     </form>
-    <button type="button" class="btn btn-success" (click)="submitGame()">
-      Add Game!
-    </button>
+    <div class="mx-auto mt-3" style="width: 20%">
+      <button type="button" class="btn btn-success" (click)="submitGame()">
+        Add Game!
+      </button>
+    </div>
   </div>
 </div>

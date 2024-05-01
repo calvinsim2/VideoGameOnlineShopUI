@@ -39,6 +39,7 @@ export class AddGameComponent {
     this.gameSubmissionForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      imageurl: ['', Validators.required],
       codeMatureRating: ['', Validators.required],
       concatenatedCodeGenre: ['', Validators.required],
       concatenatedCodePlatform: ['', Validators.required],
