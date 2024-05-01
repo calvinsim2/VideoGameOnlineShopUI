@@ -5,7 +5,7 @@ export interface DeveloperModel {
   logo: string;
 }
 
-export interface DeveloperSubmissionMode {
+export interface DeveloperSubmissionModel {
   name: string;
   slogan: string;
   logo: string;
