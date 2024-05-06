@@ -23,7 +23,7 @@ export class GameService {
   }
 
   addNewGame(gameSubmissionModel: GameSubmissionModel) {
-    this.http.post<GameSubmissionModel>(
+    return this.http.post<GameSubmissionModel>(
       this.apiConstant.baseApiUrl + this.apiConstant.game,
       gameSubmissionModel
     );

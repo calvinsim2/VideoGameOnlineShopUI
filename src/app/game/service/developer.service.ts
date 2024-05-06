@@ -20,8 +20,11 @@ export class DeveloperService {
   }
 
   addNewDeveloper(developerSubmissionModel: DeveloperSubmissionModel) {
-    this.http.post<DeveloperSubmissionModel>(
-      this.apiConstant.baseApiUrl + this.apiConstant.developer,
+    return this.http.post<DeveloperSubmissionModel>(
+      this.apiConstant.baseApiUrl +
+        this.apiConstant.developer +
+        '/' +
+        this.apiConstant.add,
       developerSubmissionModel
     );
   }

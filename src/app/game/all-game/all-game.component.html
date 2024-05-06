@@ -5,7 +5,7 @@
       style="width: 18rem"
       (click)="viewGame(game.id)"
     >
-      <img [src]="game.imageUrl" class="card-img-top" alt="game" />
+      <img [src]="game.imageUrl" class="card-img-top game-image" alt="game" />
       <div class="card-body text-center">
         <h5 class="card-title">{{ game.name }}</h5>
         <p class="card-text">${{ game.price }}</p>

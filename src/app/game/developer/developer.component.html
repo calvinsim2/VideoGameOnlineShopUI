@@ -1,1 +1,100 @@
-<p>developer works!</p>
+<div class="content container-fluid">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div class="add-blog mt-2">
+      <button
+        class="btn addbtn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#developerModal"
+      >
+        <i class="fa fa-plus"></i> Add New Developer
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="width: 800px">
+  <div class="row" *ngFor="let developer of developerList">
+    <div class="col-sm-1">
+      <img [src]="defaultImage" alt="developer" class="logo" />
+    </div>
+    <div class="col">{{ developer.name }}</div>
+    <div class="col">{{ developer.slogan }}</div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="developerModal"
+  tabindex="-1"
+  aria-labelledby="developerLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content decorate-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="blogModalLabel">Add new Developer</h5>
+        <button
+          (click)="onClose()"
+          type="button"
+          id="close-emp"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="developerForm">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >Name <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label">Slogan </label>
+                <input
+                  type="text"
+                  formControlName="slogan"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label">Logo </label>
+                <input
+                  type="text"
+                  formControlName="logo"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="text-center mt-5">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addNewDeveloper()"
+          >
+            Add Developer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

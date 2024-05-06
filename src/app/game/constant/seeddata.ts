@@ -54,3 +54,7 @@ export class CodeDecodeGenreSeedData {
     },
   ];
 }
+
+export class Urls {
+  defaultUrlLogo: string = 'https://imgur.com/CoQemnM';
+}

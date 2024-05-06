@@ -6,4 +6,5 @@ export class ApiConstant {
   public matureRating: string = 'matureRating';
   public genre: string = 'genre';
   public platform: string = 'platform';
+  public add: string = 'add';
 }

@@ -173,7 +173,23 @@ export class AddGameComponent {
 
   submitGame() {
     console.log(this.gameSubmissionForm.value);
+
+    if (this.gameSubmissionForm.valid) {
+      this.gameService.addNewGame(this.gameSubmissionForm.value).subscribe({
+        next: () => {
+          alert(`Game Added successfully! `);
+          document.getElementById('close-emp')?.click();
+          this.router.navigate([`game/allGame`]);
+        },
+        error: () => {
+          alert(`An error has occured. Please try again later `);
+        },
+      });
+    } else {
+      alert(`An error has occured. Please try again later `);
+    }
   }
+
   seeGameList() {
     this.router.navigate([`game/allGame`]);
   }
