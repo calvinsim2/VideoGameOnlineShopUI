@@ -39,7 +39,7 @@ export class AddGameComponent {
     this.gameSubmissionForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      imageurl: ['', Validators.required],
+      imageurl: [''],
       codeMatureRating: ['', Validators.required],
       concatenatedCodeGenre: ['', Validators.required],
       concatenatedCodePlatform: ['', Validators.required],
@@ -105,6 +105,7 @@ export class AddGameComponent {
           );
         },
         error: (err) => {
+          console.log(err);
           alert(`An error has occured. Please try again later `);
         },
       });
@@ -178,15 +179,16 @@ export class AddGameComponent {
       this.gameService.addNewGame(this.gameSubmissionForm.value).subscribe({
         next: () => {
           alert(`Game Added successfully! `);
-          document.getElementById('close-emp')?.click();
+          document.getElementById('close-add-developer')?.click();
           this.router.navigate([`game/allGame`]);
         },
-        error: () => {
-          alert(`An error has occured. Please try again later `);
+        error: (err) => {
+          console.log(err);
+          alert(`${err.error}`);
         },
       });
     } else {
-      alert(`An error has occured. Please try again later `);
+      alert(`An error has occured. Check input values and try again`);
     }
   }
 

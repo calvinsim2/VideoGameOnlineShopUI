@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="container" style="width: 800px">
+<div class="container mx-auto" style="width: 800px">
   <div class="row" *ngFor="let developer of developerList">
     <div class="col-sm-1">
       <img [src]="defaultImage" alt="developer" class="logo" />
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal - Add Developer -->
 
 <div
   class="modal fade"
@@ -40,7 +40,7 @@
         <button
           (click)="onClose()"
           type="button"
-          id="close-emp"
+          id="close-add-developer"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
