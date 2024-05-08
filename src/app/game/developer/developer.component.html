@@ -1,6 +1,6 @@
 <div class="content container-fluid">
   <div class="page-header d-flex justify-content-between align-items-center">
-    <div class="add-blog mt-2">
+    <div class="add-blog my-2">
       <button
         class="btn addbtn btn-success"
         data-bs-toggle="modal"
@@ -12,15 +12,31 @@
   </div>
 </div>
 
-<div class="container mx-auto" style="width: 800px">
-  <div class="row" *ngFor="let developer of developerList">
-    <div class="col-sm-1">
-      <img [src]="defaultImage" alt="developer" class="logo" />
-    </div>
-    <div class="col">{{ developer.name }}</div>
-    <div class="col">{{ developer.slogan }}</div>
-  </div>
-</div>
+<table class="table table-striped mx-auto">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Logo</th>
+      <th scope="col">Name</th>
+      <th scope="col">Slogan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let developer of developerList">
+      <th scope="row"></th>
+      <td> {{ developer.logo }}</td>
+      <td>{{ developer.name }}</td>
+      <td> {{ developer.slogan }}</td>
+      <td> <button
+        class="btn addbtn btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#developerModal"
+      >
+        <i class="fa fa-plus"></i> X
+      </button></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- Modal - Add Developer -->
 
