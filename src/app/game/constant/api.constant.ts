@@ -7,4 +7,5 @@ export class ApiConstant {
   public genre: string = 'genre';
   public platform: string = 'platform';
   public add: string = 'add';
+  public update: string = 'update';
 }

@@ -4,6 +4,7 @@ import { ApiConstant } from '../constant/api.constant';
 import {
   DeveloperModel,
   DeveloperSubmissionModel,
+  DeveloperUpdateModel,
 } from '../model/developer.model';
 
 @Injectable({
@@ -19,6 +20,12 @@ export class DeveloperService {
     );
   }
 
+  getDeveloperById(id: string) {
+    return this.http.get<DeveloperModel>(
+      this.apiConstant.baseApiUrl + this.apiConstant.developer + `/${id}`
+    );
+  }
+
   addNewDeveloper(developerSubmissionModel: DeveloperSubmissionModel) {
     return this.http.post<DeveloperSubmissionModel>(
       this.apiConstant.baseApiUrl +
@@ -26,6 +33,22 @@ export class DeveloperService {
         '/' +
         this.apiConstant.add,
       developerSubmissionModel
+    );
+  }
+
+  updateDeveloper(developerUpdateModel: DeveloperUpdateModel) {
+    return this.http.put<DeveloperUpdateModel>(
+      this.apiConstant.baseApiUrl +
+        this.apiConstant.developer +
+        '/' +
+        this.apiConstant.update,
+      developerUpdateModel
+    );
+  }
+
+  deleteDeveloper(id: string) {
+    return this.http.delete(
+      this.apiConstant.baseApiUrl + this.apiConstant.developer + `/${id}`
     );
   }
 }

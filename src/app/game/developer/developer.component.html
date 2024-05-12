@@ -4,7 +4,7 @@
       <button
         class="btn addbtn btn-success"
         data-bs-toggle="modal"
-        data-bs-target="#developerModal"
+        data-bs-target="#developerAddModal"
       >
         <i class="fa fa-plus"></i> Add New Developer
       </button>
@@ -24,16 +24,29 @@
   <tbody>
     <tr *ngFor="let developer of developerList">
       <th scope="row"></th>
-      <td> {{ developer.logo }}</td>
+      <td>{{ developer.logo }}</td>
       <td>{{ developer.name }}</td>
-      <td> {{ developer.slogan }}</td>
-      <td> <button
-        class="btn addbtn btn-danger"
-        data-bs-toggle="modal"
-        data-bs-target="#developerModal"
-      >
-        <i class="fa fa-plus"></i> X
-      </button></td>
+      <td>{{ developer.slogan }}</td>
+      <td>
+        <button
+          class="btn addbtn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#developerUpdateModal"
+          (click)="assignDeleteDeveloperId(developer.id)"
+        >
+          <i class="fa fa-pencil"></i>
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn addbtn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#developerDeleteModal"
+          (click)="assignDeleteDeveloperId(developer.id)"
+        >
+          X
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -42,7 +55,7 @@
 
 <div
   class="modal fade"
-  id="developerModal"
+  id="developerAddModal"
   tabindex="-1"
   aria-labelledby="developerLabel"
   aria-hidden="true"
@@ -108,6 +121,49 @@
             (click)="addNewDeveloper()"
           >
             Add Developer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Delete Developer -->
+
+<div
+  class="modal fade"
+  id="developerDeleteModal"
+  tabindex="-1"
+  aria-labelledby="developerDeleteLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content decorate-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="developerDeleteModal">Delete Developer</h5>
+        <button
+          (click)="onClose()"
+          type="button"
+          id="close-delete-developer"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mt-1">
+          This removes all games tagged to this developer, and cannot be undone.
+          Proceed?
+        </div>
+        <div class="text-center mt-2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteSelectedDeveloper(selectedDeveloperId)"
+          >
+            Delete Developer
           </button>
         </div>
       </div>

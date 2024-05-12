@@ -15,6 +15,7 @@ export class DeveloperComponent implements OnInit {
   public defaultUrl: Urls = new Urls();
   public developerList: DeveloperModel[] = [];
   public defaultImage: string = 'https://imgur.com/CoQemnM.jpg';
+  public selectedDeveloperId: string = '';
 
   public developerForm!: FormGroup;
 
@@ -48,8 +49,13 @@ export class DeveloperComponent implements OnInit {
       });
   }
 
+  assignDeleteDeveloperId(id: string) {
+    this.selectedDeveloperId = id;
+  }
+
   onClose() {
     this.developerForm.reset();
+    this.selectedDeveloperId = '';
   }
 
   addNewDeveloper() {
@@ -59,7 +65,7 @@ export class DeveloperComponent implements OnInit {
         .subscribe({
           next: () => {
             alert(`Developer Added successfully! `);
-            document.getElementById('close-emp')?.click();
+            document.getElementById('close-add-developer')?.click();
           },
           error: () => {
             alert(`An error has occured. Please try again later `);
@@ -68,5 +74,18 @@ export class DeveloperComponent implements OnInit {
     } else {
       alert(`An error has occured. Please try again later `);
     }
+  }
+
+  deleteSelectedDeveloper(id: string) {
+    this.developerService.deleteDeveloper(id).subscribe({
+      next: () => {
+        this.selectedDeveloperId = '';
+        alert(`Developer deleted successfully! `);
+        document.getElementById('close-delete-developer')?.click();
+      },
+      error: () => {
+        alert(`An error has occured. Please try again later `);
+      },
+    });
   }
 }

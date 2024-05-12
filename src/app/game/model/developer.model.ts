@@ -10,3 +10,10 @@ export interface DeveloperSubmissionModel {
   slogan: string;
   logo: string;
 }
+
+export interface DeveloperUpdateModel {
+  id: string;
+  name: string;
+  slogan: string;
+  logo: string;
+}
