@@ -18,6 +18,7 @@ export class DeveloperComponent implements OnInit {
   public selectedDeveloperId: string = '';
 
   public developerForm!: FormGroup;
+  public developerUpdateForm!: FormGroup;
 
   constructor(
     private developerService: DeveloperService,
@@ -27,6 +28,13 @@ export class DeveloperComponent implements OnInit {
 
   ngOnInit(): void {
     this.developerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      slogan: [''],
+      logo: [''],
+    });
+
+    this.developerUpdateForm = this.formBuilder.group({
+      id: ['', Validators.required],
       name: ['', Validators.required],
       slogan: [''],
       logo: [''],
@@ -49,12 +57,9 @@ export class DeveloperComponent implements OnInit {
       });
   }
 
-  assignDeleteDeveloperId(id: string) {
-    this.selectedDeveloperId = id;
-  }
-
   onClose() {
     this.developerForm.reset();
+    this.developerUpdateForm.reset();
     this.selectedDeveloperId = '';
   }
 
@@ -76,6 +81,45 @@ export class DeveloperComponent implements OnInit {
     }
   }
 
+  obtainDeveloperDetailsForUpdate(id: string) {
+    this.developerService
+      .getDeveloperById(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.developerUpdateForm.setValue({
+            id: res.id,
+            name: res.name,
+            slogan: res.slogan,
+            logo: res.logo,
+          });
+        },
+        error: (err) => {
+          alert(`${err.error}`);
+          document.getElementById('close-update-developer')?.click();
+        },
+      });
+  }
+
+  updateSelectedDeveloper() {
+    this.developerService
+      .updateDeveloper(this.developerUpdateForm.value)
+      .subscribe({
+        next: () => {
+          this.developerUpdateForm.reset();
+          alert(`Developer updated successfully! `);
+          document.getElementById('close-update-developer')?.click();
+        },
+        error: (err) => {
+          alert(`${err.error}`);
+        },
+      });
+  }
+
+  assignDeleteDeveloperId(id: string) {
+    this.selectedDeveloperId = id;
+  }
+
   deleteSelectedDeveloper(id: string) {
     this.developerService.deleteDeveloper(id).subscribe({
       next: () => {
@@ -83,8 +127,8 @@ export class DeveloperComponent implements OnInit {
         alert(`Developer deleted successfully! `);
         document.getElementById('close-delete-developer')?.click();
       },
-      error: () => {
-        alert(`An error has occured. Please try again later `);
+      error: (err) => {
+        alert(`${err.error}`);
       },
     });
   }
