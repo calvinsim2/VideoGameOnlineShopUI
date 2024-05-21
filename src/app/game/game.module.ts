@@ -7,6 +7,7 @@ import { GameDetailComponent } from './game-detail/game-detail.component';
 import { AddGameComponent } from './add-game/add-game.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeveloperComponent } from './developer/developer.component';
+import { UpdateGameComponent } from './update-game/update-game.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DeveloperComponent } from './developer/developer.component';
     GameDetailComponent,
     AddGameComponent,
     DeveloperComponent,
+    UpdateGameComponent,
   ],
   imports: [ReactiveFormsModule, FormsModule, CommonModule, GameRoutingModule],
 })

@@ -6,7 +6,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="hasDataLoaded">
+  <div *ngIf="hasDataLoaded" class="text-center" style="width: 800px">
     <div class="text-center">
       <h1 class="text-center roboto-slab-title">{{ gameDetail.name }}</h1>
     </div>
@@ -14,6 +14,21 @@
       <h1 class="text-center roboto-slab-title">
         -------------------------------------------------
       </h1>
+    </div>
+    <div class="page-header d-flex justify-content-end align-items-center">
+      <button
+        class="btn addbtn btn-success m-1"
+        (click)="navigateToEditGame(gameDetail.id)"
+      >
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button
+        class="btn addbtn btn-danger m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#game-delete-modal"
+      >
+        X
+      </button>
     </div>
     <div
       class="container-fluid text-center roboto-slab-title"
@@ -33,6 +48,48 @@
 
     <div class="container-fluid text-center mt-3" style="width: 600px">
       <p>{{ gameDetail.description }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Delete Game -->
+
+<div
+  class="modal fade"
+  id="game-delete-modal"
+  tabindex="-1"
+  aria-labelledby="game-delete-label"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content decorate-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="game-delete-modal">Delete Game</h5>
+        <button
+          (click)="onClose()"
+          type="button"
+          id="close-delete-game"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mt-1">
+          Delete Game, this cannot be undone. Proceed?
+        </div>
+        <div class="text-center mt-2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteGame(gameId)"
+          >
+            Delete Game
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

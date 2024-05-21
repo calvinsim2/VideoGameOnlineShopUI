@@ -39,6 +39,8 @@ export class GameDetailComponent {
     this.getGameDetails();
   }
 
+  onClose() {}
+
   getGameDetails() {
     this.gameService
       .getGamebyId(this.gameId)
@@ -88,6 +90,23 @@ export class GameDetailComponent {
 
   seeGameList() {
     this.router.navigate([`game/allGame`]);
+  }
+
+  navigateToEditGame(id: string) {
+    this.router.navigate([`game/game/update/${id}`]);
+  }
+
+  deleteGame(id: string) {
+    this.gameService.deleteGame(id).subscribe({
+      next: (res) => {
+        document.getElementById('close-delete-game')?.click();
+        alert(`Game has been successfully deleted!`);
+        this.router.navigate([`game/allGame`]);
+      },
+      error: (err) => {
+        alert(`${err.error}`);
+      },
+    });
   }
 
   extractListToDecodeValues(codeTables: CodesTableModel[]) {

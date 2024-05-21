@@ -21,3 +21,15 @@ export interface GameSubmissionModel {
   developerId: string;
   codeGenre: string;
 }
+
+export interface GameUpdateModel {
+  id: string;
+  name: string;
+  description: string;
+  codeMatureRating: string;
+  codePlatform: string;
+  price: number;
+  imageUrl: string;
+  developerId: string;
+  codeGenre: string;
+}
