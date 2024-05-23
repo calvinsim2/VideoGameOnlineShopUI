@@ -22,12 +22,6 @@ import { DeveloperService } from '../service/developer.service';
 export class UpdateGameComponent {
   gameId!: string;
   currentGameDetail!: GameModel;
-  currentGameMatureRating!: CodesTableModel;
-  currentGameMatureRatingDecodeValue!: string;
-  currentGameGenreList: CodesTableModel[] = [];
-  currentGameGenres!: string;
-  currentGamePlatformList: CodesTableModel[] = [];
-  currentGamePlatform!: string;
   hasDataLoaded: boolean = false;
   // forms related
   public gameUpdateForm!: FormGroup;
@@ -68,6 +62,7 @@ export class UpdateGameComponent {
     this.codesTablePlatformUpdateForm = this.formBuilder.group({});
 
     this.getAllRequiredData();
+    this.getGameDetail();
   }
 
   getAllRequiredData() {
@@ -75,6 +70,31 @@ export class UpdateGameComponent {
     this.getAllCodeMatureRating();
     this.getAllCodeGenre();
     this.getAllCodePlatform();
+  }
+
+  getGameDetail() {
+    this.gameService
+      .getGamebyId(this.gameId)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.currentGameDetail = res;
+          this.patchInitialValues();
+        },
+        error: (err) => {
+          alert(`${err}`);
+        },
+      });
+  }
+
+  patchInitialValues() {
+    console.log(this.currentGameDetail);
+    this.gameUpdateForm.patchValue({
+      name: this.currentGameDetail.name,
+      description: this.currentGameDetail.description,
+      imageurl: this.currentGameDetail.imageUrl,
+      price: this.currentGameDetail.price,
+    });
   }
 
   getAllDevelopers() {
@@ -204,5 +224,9 @@ export class UpdateGameComponent {
     } else {
       alert(`An error has occured. Check input values and try again`);
     }
+  }
+
+  returnToViewGame() {
+    this.router.navigate([`game/game/${this.gameId}`]);
   }
 }
