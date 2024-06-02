@@ -87,16 +87,6 @@ export class UpdateGameComponent {
       });
   }
 
-  patchInitialValues() {
-    console.log(this.currentGameDetail);
-    this.gameUpdateForm.patchValue({
-      name: this.currentGameDetail.name,
-      description: this.currentGameDetail.description,
-      imageurl: this.currentGameDetail.imageUrl,
-      price: this.currentGameDetail.price,
-    });
-  }
-
   getAllDevelopers() {
     this.developerService
       .getAllDeveloper()
@@ -118,6 +108,7 @@ export class UpdateGameComponent {
       .subscribe({
         next: (res) => {
           this.codeMatureRatingList = res;
+          console.log(this.codeMatureRatingList);
         },
         error: (err) => {
           alert(`An error has occured. Please try again later `);
@@ -223,6 +214,45 @@ export class UpdateGameComponent {
       });
     } else {
       alert(`An error has occured. Check input values and try again`);
+    }
+  }
+
+  patchInitialValues() {
+    this.gameUpdateForm.patchValue({
+      name: this.currentGameDetail.name,
+      description: this.currentGameDetail.description,
+      imageurl: this.currentGameDetail.imageUrl,
+      price: this.currentGameDetail.price,
+      codeMatureRating: this.currentGameDetail.codeMatureRating,
+      developerId: this.currentGameDetail.developerId,
+    });
+
+    this.patchInitialCodeGenre();
+    this.patchInitialCodePlatform();
+  }
+
+  patchInitialCodeGenre() {
+    let currentGameCodeGenre = this.currentGameDetail.codeGenre.split(',');
+
+    for (let genre of currentGameCodeGenre) {
+      if (this.codesTableGenreUpdateForm.controls[genre]) {
+        this.codesTableGenreUpdateForm.patchValue({
+          [genre]: true,
+        });
+      }
+    }
+  }
+
+  patchInitialCodePlatform() {
+    let currentGameCodePlatform =
+      this.currentGameDetail.codePlatform.split(',');
+
+    for (let platform of currentGameCodePlatform) {
+      if (this.codesTablePlatformUpdateForm.controls[platform]) {
+        this.codesTablePlatformUpdateForm.patchValue({
+          [platform]: true,
+        });
+      }
     }
   }
 
