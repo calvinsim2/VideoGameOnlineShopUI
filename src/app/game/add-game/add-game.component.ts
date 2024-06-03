@@ -41,8 +41,8 @@ export class AddGameComponent {
       description: ['', Validators.required],
       imageurl: [''],
       codeMatureRating: ['', Validators.required],
-      concatenatedCodeGenre: ['', Validators.required],
-      concatenatedCodePlatform: ['', Validators.required],
+      codeGenre: ['', Validators.required],
+      codePlatform: ['', Validators.required],
       price: [0, Validators.min(0)],
       developerId: [
         this.developerList.length > 0 ? this.developerList[0].name : '',
@@ -117,7 +117,7 @@ export class AddGameComponent {
     );
 
     this.gameSubmissionForm.patchValue({
-      concatenatedCodeGenre: selectedCodeGenres,
+      codeGenre: selectedCodeGenres,
     });
   }
 
@@ -146,7 +146,7 @@ export class AddGameComponent {
     );
 
     this.gameSubmissionForm.patchValue({
-      concatenatedCodePlatform: selectedCodePlatforms,
+      codePlatform: selectedCodePlatforms,
     });
   }
 

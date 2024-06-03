@@ -24,7 +24,11 @@
   <tbody>
     <tr *ngFor="let developer of developerList">
       <th scope="row"></th>
-      <td>{{ developer.logo }}</td>
+      <td>
+        <div class="logo">
+          <img [src]="developer.logo" class="logo" />
+        </div>
+      </td>
       <td>{{ developer.name }}</td>
       <td>{{ developer.slogan }}</td>
       <td>

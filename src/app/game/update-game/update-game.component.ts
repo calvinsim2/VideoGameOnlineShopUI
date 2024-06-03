@@ -52,8 +52,8 @@ export class UpdateGameComponent {
       description: ['', Validators.required],
       imageurl: [''],
       codeMatureRating: ['', Validators.required],
-      concatenatedCodeGenre: ['', Validators.required],
-      concatenatedCodePlatform: ['', Validators.required],
+      codeGenre: ['', Validators.required],
+      codePlatform: ['', Validators.required],
       price: [0, Validators.min(0)],
       developerId: ['', Validators.required],
     });
@@ -142,7 +142,7 @@ export class UpdateGameComponent {
     );
 
     this.gameUpdateForm.patchValue({
-      concatenatedCodeGenre: selectedCodeGenres,
+      codeGenre: selectedCodeGenres,
     });
   }
 
@@ -171,7 +171,7 @@ export class UpdateGameComponent {
     );
 
     this.gameUpdateForm.patchValue({
-      concatenatedCodePlatform: selectedCodePlatforms,
+      codePlatform: selectedCodePlatforms,
     });
   }
 
@@ -219,6 +219,7 @@ export class UpdateGameComponent {
 
   patchInitialValues() {
     this.gameUpdateForm.patchValue({
+      id: this.gameId,
       name: this.currentGameDetail.name,
       description: this.currentGameDetail.description,
       imageurl: this.currentGameDetail.imageUrl,
@@ -241,6 +242,8 @@ export class UpdateGameComponent {
         });
       }
     }
+
+    this.updateConcatenatedCodeGenre();
   }
 
   patchInitialCodePlatform() {
@@ -254,6 +257,8 @@ export class UpdateGameComponent {
         });
       }
     }
+
+    this.updateConcatenatedCodePlatform();
   }
 
   returnToViewGame() {
